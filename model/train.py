@@ -9,22 +9,20 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 from joblib import dump
 
 
-flights_jan_2019 = pd.read_csv("data/Jan_2019_ontime.csv")
+
 flights_jan_2020 = pd.read_csv("data/Jan_2020_ontime.csv")
 # Data pre-processing
 
-# Concatenate the two datasets
-flights_jan = pd.concat([flights_jan_2019, flights_jan_2020], ignore_index=True)
 
 # Select relevant features
 features = ['DAY_OF_WEEK', 'DEP_DEL15', 'ARR_DEL15']
 
-flights_jan = flights_jan[features].dropna()
+flights_jan_2020 = flights_jan_2020[features].dropna()
 
 # Split the data into training and testing sets. 
 
-X = flights_jan.drop('ARR_DEL15', axis=1)
-y = flights_jan['ARR_DEL15']
+X = flights_jan_2020.drop('ARR_DEL15', axis=1)
+y = flights_jan_2020['ARR_DEL15']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
